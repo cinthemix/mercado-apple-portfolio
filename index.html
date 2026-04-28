@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christopher Mercado — Creative Production Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0d0d;
+    --white: #ffffff;
+    --off: #f7f7f5;
+    --rule: #e0e0e0;
+    --mid: #666666;
+    --light: #999999;
+    --display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+    --body: 'DM Sans', -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body);
+    background: var(--white);
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 64px; height: 52px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-name {
+    font-family: var(--display);
+    font-size: 18px; letter-spacing: 0.08em;
+    color: var(--black); text-decoration: none;
+  }
+  nav ul { list-style: none; display: flex; gap: 40px; }
+  nav ul a {
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none;
+    transition: color 0.15s;
+  }
+  nav ul a:hover { color: var(--black); }
+
+  /* HERO */
+  .hero {
+    padding: 140px 64px 80px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero-label {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--light); margin-bottom: 32px;
+    opacity: 0; animation: fadeIn 0.6s ease 0.1s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--display);
+    font-size: clamp(72px, 11vw, 160px);
+    line-height: 0.92; letter-spacing: 0.04em;
+    color: var(--black);
+    margin-bottom: 48px;
+    opacity: 0; animation: fadeIn 0.7s ease 0.25s forwards;
+  }
+
+  .hero-rule {
+    width: 100%; height: 1px;
+    background: var(--rule); margin-bottom: 48px;
+    opacity: 0; animation: fadeIn 0.6s ease 0.4s forwards;
+  }
+
+  .hero-bottom {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    opacity: 0; animation: fadeIn 0.7s ease 0.5s forwards;
+  }
+
+  .hero-problem-label {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--light); margin-bottom: 16px;
+  }
+
+  .hero-problem {
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300; line-height: 1.5;
+    color: var(--black);
+  }
+
+  .hero-problem strong {
+    font-weight: 500;
+  }
+
+  /* STAT STRIP */
+  .stats {
+    display: flex; flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .stat-row {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 36px; letter-spacing: 0.02em;
+    color: var(--black); line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px; font-weight: 300;
+    color: var(--mid); letter-spacing: 0.02em;
+    text-align: right; max-width: 200px;
+  }
+
+  /* SECTION */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 96px 64px;
+  }
+
+  .section-head {
+    display: flex; align-items: baseline;
+    gap: 24px; margin-bottom: 64px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-num {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.14em; color: var(--light);
+    text-transform: uppercase; padding-top: 4px;
+    min-width: 24px;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: 0.04em; line-height: 1;
+    color: var(--black);
+  }
+
+  /* CASE STUDIES */
+  .case { margin-bottom: 80px; }
+  .case:last-child { margin-bottom: 0; }
+
+  .case-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+
+  .case-tag {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--light); margin-bottom: 12px;
+  }
+
+  .case-title {
+    font-family: var(--display);
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: 0.03em; line-height: 1;
+    color: var(--black);
+  }
+
+  .case-role {
+    font-size: 13px; font-weight: 300;
+    color: var(--mid); margin-top: 10px;
+    letter-spacing: 0.01em;
+  }
+
+  .case-metrics {
+    display: flex; flex-direction: column;
+    gap: 0; min-width: 200px;
+    border: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+
+  .case-metric {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .case-metric:last-child { border-bottom: none; }
+
+  .case-metric-num {
+    font-family: var(--display);
+    font-size: 28px; letter-spacing: 0.02em;
+    color: var(--black); line-height: 1;
+  }
+
+  .case-metric-label {
+    font-size: 11px; font-weight: 300;
+    color: var(--light); margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .case-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .case-block-label {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--light); margin-bottom: 14px;
+  }
+
+  .case-block-text {
+    font-size: 15px; font-weight: 300;
+    color: var(--mid); line-height: 1.7;
+  }
+
+  .case-block-text p { margin-bottom: 10px; }
+  .case-block-text p:last-child { margin-bottom: 0; }
+
+  .outcome-text {
+    font-size: 15px; font-weight: 400;
+    color: var(--black); line-height: 1.7;
+  }
+
+  /* DIVIDER */
+  .full-rule {
+    width: 100%; height: 1px;
+    background: var(--rule);
+  }
+
+  /* CAPABILITIES */
+  .cap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .cap-item {
+    padding: 40px 36px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cap-item:nth-child(3n) { border-right: none; }
+  .cap-item:nth-last-child(-n+3) { border-bottom: none; }
+
+  .cap-num {
+    font-family: var(--display);
+    font-size: 48px; letter-spacing: 0.02em;
+    color: var(--rule); line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .cap-title {
+    font-size: 15px; font-weight: 500;
+    color: var(--black); margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .cap-body {
+    font-size: 13px; font-weight: 300;
+    color: var(--mid); line-height: 1.7;
+  }
+
+  /* CAREER */
+  .career-list { }
+
+  .career-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .career-row.visible { opacity: 1; transform: translateY(0); }
+  .career-row:last-child { border-bottom: none; }
+
+  .career-dates {
+    font-size: 13px; font-weight: 300;
+    color: var(--light); padding-top: 3px;
+    letter-spacing: 0.02em;
+  }
+
+  .career-right { }
+
+  .career-role {
+    font-family: var(--display);
+    font-size: 22px; letter-spacing: 0.03em;
+    color: var(--black); margin-bottom: 4px;
+  }
+
+  .career-company {
+    font-size: 13px; font-weight: 300;
+    color: var(--mid); margin-bottom: 12px;
+  }
+
+  .career-desc {
+    font-size: 14px; font-weight: 300;
+    color: var(--mid); line-height: 1.7;
+    max-width: 580px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    padding: 80px 64px;
+  }
+
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between;
+    align-items: flex-end; gap: 48px; flex-wrap: wrap;
+  }
+
+  .footer-name {
+    font-family: var(--display);
+    font-size: clamp(48px, 7vw, 96px);
+    letter-spacing: 0.04em; line-height: 1;
+    color: var(--white); margin-bottom: 16px;
+  }
+
+  .footer-title {
+    font-size: 13px; font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-contacts {
+    display: flex; flex-direction: column;
+    gap: 10px; text-align: right;
+  }
+
+  .footer-contacts a {
+    font-size: 14px; font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none; transition: color 0.15s;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-contacts a:hover { color: var(--white); }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    nav ul { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-bottom { grid-template-columns: 1fr; gap: 40px; }
+    .section { padding: 72px 24px; }
+    .case-header { grid-template-columns: 1fr; }
+    .case-body { grid-template-columns: 1fr; gap: 32px; }
+    .cap-grid { grid-template-columns: 1fr; }
+    .cap-item { border-right: none; }
+    .cap-item:nth-last-child(-n+3) { border-bottom: 1px solid var(--rule); }
+    .cap-item:last-child { border-bottom: none; }
+    .career-row { grid-template-columns: 1fr; gap: 8px; }
+    footer { padding: 56px 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+    .footer-contacts { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">CHRISTOPHER MERCADO</a>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Creative Production Portfolio — 2025</p>
+  <h1 class="hero-name">CHRISTOPHER<br>MERCADO</h1>
+  <div class="hero-rule"></div>
+  <div class="hero-bottom">
+    <div>
+      <p class="hero-problem-label">The Problem I Solve</p>
+      <p class="hero-problem">Creative production programs at scale break in predictable ways.<br><strong>I'm the person who builds the systems that keep them running.</strong></p>
+    </div>
+    <div class="stats">
+      <div class="stat-row">
+        <div class="stat-num">$26.87M</div>
+        <div class="stat-label">Annual program managed at Amazon</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">On-time delivery across 1,500+ activations</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">254%</div>
+        <div class="stat-label">YoY revenue growth supported</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">25%</div>
+        <div class="stat-label">Faster production turnaround at Left Off Madison</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE STUDIES -->
+<div class="section" id="work">
+  <div class="section-head reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">SELECTED WORK</h2>
+  </div>
+
+  <!-- Amazon Advertising -->
+  <div class="case reveal">
+    <div class="case-header">
+      <div>
+        <p class="case-tag">Amazon Advertising · 2020–2022</p>
+        <h3 class="case-title">$26.87M AD PROGRAM AT SCALE</h3>
+        <p class="case-role">Senior Program Manager (PM III / L6) · New York, NY</p>
+      </div>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num">$26.87M</div>
+          <div class="case-metric-label">Revenue managed</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">254%</div>
+          <div class="case-metric-label">YoY growth</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">98%</div>
+          <div class="case-metric-label">On-time delivery</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">1,500+</div>
+          <div class="case-metric-label">Annual activations</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <p class="case-block-label">The Situation</p>
+        <p class="case-block-text">A $26.87M annual content and advertising program with $1M+ in vendor and production budgets — spanning paid media, audio ad production, and multi-format delivery across dispersed teams and time zones, with no unified infrastructure to support scale.</p>
+      </div>
+      <div>
+        <p class="case-block-label">What I Built</p>
+        <p class="case-block-text">
+          <p>Designed end-to-end digital campaign infrastructure across paid media, audio, and multi-format delivery.</p>
+          <p>Optimized production systems, tracking, and SLAs to improve visibility, predictability, and scalability.</p>
+          <p>Strengthened agency partnerships and reduced production timelines across dispersed teams and time zones.</p>
+          <p>Served as sole program lead through Prime Day, holiday season, and UK/Germany international expansion.</p>
+        </p>
+      </div>
+      <div>
+        <p class="case-block-label">The Outcome</p>
+        <p class="outcome-text">98% on-time delivery sustained across 1,500+ annual activations. Program supported 254% YoY revenue growth. Infrastructure and SLA frameworks became the operational baseline across the team.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-rule" style="margin: 80px 0;"></div>
+
+  <!-- Amazon Music -->
+  <div class="case reveal">
+    <div class="case-header">
+      <div>
+        <p class="case-tag">Amazon Music · 2022–2024</p>
+        <h3 class="case-title">GLOBAL CONTENT PRODUCTION</h3>
+        <p class="case-role">Senior Program Manager · New York, NY</p>
+      </div>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num">500+</div>
+          <div class="case-metric-label">Initiatives launched</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">35%</div>
+          <div class="case-metric-label">Engagement growth</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">6</div>
+          <div class="case-metric-label">Teams coordinated</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <p class="case-block-label">The Situation</p>
+        <p class="case-block-text">A global streaming platform requiring coordinated content production across Product, UX, Engineering, Marketing, Legal, Data, Video, and Social Media — with performance analytics that weren't being translated into production decisions.</p>
+      </div>
+      <div>
+        <p class="case-block-label">What I Built</p>
+        <p class="case-block-text">
+          <p>Built a unified creative and operational framework managing the full content lifecycle from concept through delivery.</p>
+          <p>Collaborated directly with Video and Social Media teams on shoot scheduling, content production, and delivery.</p>
+          <p>Turned performance analytics into actionable content strategy and workflow improvements.</p>
+        </p>
+      </div>
+      <div>
+        <p class="case-block-label">The Outcome</p>
+        <p class="outcome-text">35% audience engagement growth. 500+ initiatives launched end-to-end. Six cross-functional teams aligned under a single production framework.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-rule" style="margin: 80px 0;"></div>
+
+  <!-- HOT 97 / WBLS -->
+  <div class="case reveal">
+    <div class="case-header">
+      <div>
+        <p class="case-tag">Emmis Communications (HOT 97 · WBLS) · 2007–2020</p>
+        <h3 class="case-title">13 YEARS RUNNING A PRODUCTION FUNCTION</h3>
+        <p class="case-role">Creative Services Director · New York, NY</p>
+      </div>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num">$5M+</div>
+          <div class="case-metric-label">Sponsorships secured</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">$30M+</div>
+          <div class="case-metric-label">Portfolio at peak</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">$300K+</div>
+          <div class="case-metric-label">Annual capex owned</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">10</div>
+          <div class="case-metric-label">Person team led</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <p class="case-block-label">The Situation</p>
+        <p class="case-block-text">Two of New York's most iconic radio brands — HOT 97 and WBLS — requiring a full creative production function that could handle 1,500+ annual activations across broadcast, digital, and live events while growing commercial revenue.</p>
+      </div>
+      <div>
+        <p class="case-block-label">What I Built</p>
+        <p class="case-block-text">
+          <p>Built and led a 10-person creative production team, managing $300K+ in annual capex and overseeing all resource planning, vendor relationships, and agency partnerships.</p>
+          <p>Owned the complete production cycle — from quarterly forecasting and briefing through post-production and multi-format delivery.</p>
+          <p>Secured $5M+ in brand sponsorships through culturally resonant content programs connecting brands with Black and urban audiences at scale.</p>
+        </p>
+      </div>
+      <div>
+        <p class="case-block-label">The Outcome</p>
+        <p class="outcome-text">Revenue portfolio grew from $25M to $30M+. $5M+ in brand sponsorships secured. 1,500+ annual activations delivered consistently across 13 years.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-rule" style="margin: 80px 0;"></div>
+
+  <!-- Left Off Madison -->
+  <div class="case reveal">
+    <div class="case-header">
+      <div>
+        <p class="case-tag">Left Off Madison · Feb 2024–Jul 2025</p>
+        <h3 class="case-title">FORTUNE 500 CAMPAIGN PRODUCTION</h3>
+        <p class="case-role">Assistant Creative Director (Contract) · New York, NY</p>
+      </div>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <div class="case-metric-num">25%</div>
+          <div class="case-metric-label">Faster turnaround</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">F500</div>
+          <div class="case-metric-label">Client roster</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <p class="case-block-label">The Situation</p>
+        <p class="case-block-text">Fortune 500 clients requiring GTM campaign development and multi-channel advertising production — with production timelines that needed tightening and accountability gaps that were slowing speed-to-market.</p>
+      </div>
+      <div>
+        <p class="case-block-label">What I Built</p>
+        <p class="case-block-text">
+          <p>Led GTM strategy and campaign development — translating brand and product objectives into market-facing narratives across digital and social platforms.</p>
+          <p>Built standardized workflow templates and accountability checkpoints that eliminated recurring production bottlenecks.</p>
+        </p>
+      </div>
+      <div>
+        <p class="case-block-label">The Outcome</p>
+        <p class="outcome-text">Production turnaround reduced by 25%. Speed-to-market improved across all multi-channel advertising programs. Frameworks adopted as team standards.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="full-rule"></div>
+
+<!-- CAPABILITIES -->
+<div class="section" id="capabilities">
+  <div class="section-head reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">CAPABILITIES</h2>
+  </div>
+  <div class="cap-grid reveal">
+    <div class="cap-item">
+      <div class="cap-num">01</div>
+      <h4 class="cap-title">Team Leadership & Mentorship</h4>
+      <p class="cap-body">Built and scaled creative production teams from the ground up. Set direction, held accountability, and developed producers across complex concurrent programs.</p>
+    </div>
+    <div class="cap-item">
+      <div class="cap-num">02</div>
+      <h4 class="cap-title">Budget & Resource Ownership</h4>
+      <p class="cap-body">Capex and vendor budget responsibility up to $1M+. Built resource plans, forecasted quarterly, made real-time trade-off decisions under business pressure.</p>
+    </div>
+    <div class="cap-item">
+      <div class="cap-num">03</div>
+      <h4 class="cap-title">Digital Campaign Infrastructure</h4>
+      <p class="cap-body">Designed production infrastructure spanning paid media, audio, multi-format delivery, and agency partnerships across dispersed teams and time zones.</p>
+    </div>
+    <div class="cap-item">
+      <div class="cap-num">04</div>
+      <h4 class="cap-title">Cross-Functional Collaboration</h4>
+      <p class="cap-body">Fluent across Creative, Legal, Engineering, HI, Marketing Platforms, Product, and Data — keeping complex projects moving through reviews, approvals, and senior checkpoints.</p>
+    </div>
+    <div class="cap-item">
+      <div class="cap-num">05</div>
+      <h4 class="cap-title">Production Systems & SLAs</h4>
+      <p class="cap-body">Optimized workflows, tracking systems, and SLAs that improved visibility, predictability, and scalability — proven across 1,500+ activations at 98% on-time delivery.</p>
+    </div>
+    <div class="cap-item">
+      <div class="cap-num">06</div>
+      <h4 class="cap-title">Brand Standards at Scale</h4>
+      <p class="cap-body">13 years enforcing quality and consistency across two major-market stations, national syndication, and global streaming. Zero tolerance for off-brand output.</p>
+    </div>
+  </div>
+</div>
+
+<div class="full-rule"></div>
+
+<!-- CAREER -->
+<div class="section" id="career">
+  <div class="section-head reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">CAREER</h2>
+  </div>
+  <div class="career-list">
+    <div class="career-row">
+      <div class="career-dates">2025 – Present</div>
+      <div class="career-right">
+        <div class="career-role">SPECIALIST</div>
+        <div class="career-company">Apple · Manhasset, NY</div>
+        <div class="career-desc">100 TMS score (top-quartile, region-wide). 99% positive feedback across 500+ customer interactions. Daily immersion in Apple's culture, brand standards, and cross-functional workflows.</div>
+      </div>
+    </div>
+    <div class="career-row">
+      <div class="career-dates">Feb 2024 – Jul 2025</div>
+      <div class="career-right">
+        <div class="career-role">ASSISTANT CREATIVE DIRECTOR (CONTRACT)</div>
+        <div class="career-company">Left Off Madison · New York, NY</div>
+        <div class="career-desc">Fortune 500 GTM campaign development. 25% production turnaround reduction. Multi-channel advertising across digital and social platforms.</div>
+      </div>
+    </div>
+    <div class="career-row">
+      <div class="career-dates">May 2020 – Feb 2024</div>
+      <div class="career-right">
+        <div class="career-role">SENIOR PROGRAM MANAGER</div>
+        <div class="career-company">Amazon (Advertising + Music) · New York, NY</div>
+        <div class="career-desc">$26.87M program · 254% YoY growth · $1M+ production budget · 98% on-time delivery across 1,500+ activations. Followed by global content production at Amazon Music — 35% engagement growth, 500+ initiatives launched.</div>
+      </div>
+    </div>
+    <div class="career-row">
+      <div class="career-dates">Jan 2007 – May 2020</div>
+      <div class="career-right">
+        <div class="career-role">CREATIVE SERVICES DIRECTOR</div>
+        <div class="career-company">Emmis Communications (HOT 97 · WBLS) · New York, NY</div>
+        <div class="career-desc">13-year tenure. 10-person team. $300K+ capex. $5M+ sponsorships secured. Portfolio grown from $25M to $30M+.</div>
+      </div>
+    </div>
+    <div class="career-row">
+      <div class="career-dates">2007 – 2020</div>
+      <div class="career-right">
+        <div class="career-role">EXECUTIVE PRODUCER</div>
+        <div class="career-company">Cafe Mocha Radio (Syndicated) · New York, NY</div>
+        <div class="career-desc">700+ episodes of the nation's leading syndicated radio program for Black women 25–55. End-to-end production across 25+ U.S. markets with zero headcount growth.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-name">CHRISTOPHER<br>MERCADO</div>
+      <div class="footer-title">Creative Production Executive · New York</div>
+    </div>
+    <div class="footer-contacts">
+      <a href="mailto:cam10010@gmail.com">cam10010@gmail.com</a>
+      <a href="tel:9174177615">917-417-7615</a>
+      <a href="https://linkedin.com/in/chrisamercado" target="_blank">linkedin.com/in/chrisamercado</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal, .career-row').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
